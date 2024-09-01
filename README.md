@@ -1,5 +1,8 @@
 # Animations lab
 
+## Course
+
+- [Animations](https://animations.dev/)
 
 ## Tools
 
