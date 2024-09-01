@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Example from '../components/Example.svelte';
 </script>
 
 <svelte:head>
@@ -6,7 +7,9 @@
 	<meta name="description" content="Svelte demo app" />
 </svelte:head>
 
-<section>oi</section>
+<section>
+	<Example />
+</section>
 
 <style>
 </style>
