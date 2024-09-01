@@ -1,20 +1,11 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import anime from 'animejs';
 	import ButtonCopy from './ButtonCopy.svelte';
-
-	onMount(() => {
-		anime({
-			targets: '.element',
-			translateX: 100,
-			easing: 'spring',
-			duration: 500
-		});
-	});
+	import FirstExample from './FirstExample.svelte';
 </script>
 
 <div class="wrapper">
 	<div class="element" />
+	<FirstExample />
 	<ButtonCopy />
 </div>
 
@@ -25,12 +16,5 @@
 		width: 100vw;
 		place-items: center;
 		background: #0d0d0d;
-	}
-
-	.element {
-		width: 48px;
-		height: 48px;
-		background: #fad658;
-		border-radius: 12px;
 	}
 </style>

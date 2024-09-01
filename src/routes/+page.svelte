@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Example from '../components/Example.svelte';
+	import Panel from '../components/Panel.svelte';
 </script>
 
 <svelte:head>
@@ -8,7 +8,7 @@
 </svelte:head>
 
 <section>
-	<Example />
+	<Panel />
 </section>
 
 <style>
