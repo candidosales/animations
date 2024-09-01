@@ -1,5 +1,6 @@
 <script lang="ts">
 	import ButtonCopy from './ButtonCopy.svelte';
+	import ButtonLogin from './ButtonLogin.svelte';
 	import FirstExample from './FirstExample.svelte';
 </script>
 
@@ -7,6 +8,7 @@
 	<div class="element" />
 	<FirstExample />
 	<ButtonCopy />
+	<ButtonLogin />
 </div>
 
 <style lang="postcss">

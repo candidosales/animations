@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let color = undefined;
+	export let color = 'rgba(255, 255, 255, 0.65)';
 	export let size = 16;
 	const bars = Array(12).fill(0);
 </script>
