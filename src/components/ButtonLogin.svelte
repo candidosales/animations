@@ -8,8 +8,8 @@
 		button.disabled = true;
 
 		const variants = {
-			hidden: { opacity: [1, 0], translateY: [0, -25] },
-			visible: { opacity: [0, 1], translateY: [25, 0] }
+			hidden: { opacity: [1, 0], translateY: [0, 25] },
+			visible: { opacity: [0, 1], translateY: [-25, 0] }
 		};
 
 		const timeline = anime.timeline({
