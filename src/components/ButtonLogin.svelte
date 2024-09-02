@@ -1,32 +1,57 @@
 <script lang="ts">
+	import anime from 'animejs';
 	import Spinner from './Spinner.svelte';
 
 	let button: HTMLButtonElement;
-	let buttonState: 'idle' | 'loading' | 'success' = 'idle';
 
 	const click = () => {
-		buttonState = 'loading';
+		button.disabled = true;
 
-		setTimeout(() => {
-			buttonState = 'success';
-		}, 1750);
+		const variants = {
+			hidden: { opacity: [1, 0], translateY: [0, -25] },
+			visible: { opacity: [0, 1], translateY: [25, 0] }
+		};
 
-		setTimeout(() => {
-			buttonState = 'idle';
-		}, 3500);
+		const timeline = anime.timeline({
+			easing: 'easeOutExpo',
+			autoplay: false,
+			duration: 300
+		});
+
+		timeline
+			.add({
+				targets: '.idle',
+				translateY: variants.hidden.translateY,
+				opacity: variants.hidden.opacity
+			})
+			.add({
+				targets: '.loading',
+				translateY: variants.visible.translateY,
+				opacity: variants.visible.opacity
+			})
+			.add({
+				targets: '.loading',
+				translateY: variants.hidden.translateY,
+				opacity: variants.hidden.opacity,
+				delay: 600
+			})
+			.add({
+				targets: '.success',
+				translateY: variants.visible.translateY,
+				opacity: variants.visible.opacity
+			});
+
+		timeline.play();
+		timeline.finished.then(() => {
+			button.disabled = false;
+		});
 	};
 </script>
 
-<button bind:this={button} class="blue-button" disabled={buttonState !== 'idle'} on:click={click}>
-	<span>
-		{#if buttonState === 'idle'}
-			<p>Send me a login link</p>
-		{:else if buttonState === 'loading'}
-			<Spinner size={16} />
-		{:else if buttonState === 'success'}
-			<p>Login link sent!</p>
-		{/if}
-	</span>
+<button bind:this={button} class="blue-button" on:click={click}>
+	<p class="idle">Send me a login link</p>
+	<Spinner class="loading" size={16} />
+	<p class="success">Login link sent!</p>
 </button>
 
 <style lang="scss">
@@ -43,14 +68,25 @@
 			0px 1px 1.5px 0px rgba(0, 0, 0, 0.32),
 			0px 0px 0px 0.5px #1a94ff;
 		position: relative;
+		color: white;
 	}
 
-	.blue-button span {
+	button {
+		position: relative;
 		display: flex;
-		width: 100%;
-		align-items: center;
 		justify-content: center;
-		color: white;
-		text-shadow: 0px 1px 1.5px rgba(0, 0, 0, 0.16);
+		align-items: center;
+		width: 100%;
+	}
+
+	.idle,
+	:global(.loading),
+	.success {
+		position: absolute;
+	}
+
+	:global(.loading),
+	.success {
+		opacity: 0;
 	}
 </style>

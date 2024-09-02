@@ -4,9 +4,13 @@
 	const bars = Array(12).fill(0);
 </script>
 
-<div class="wrapper" style:--spinner-size="{size}px" style:--spinner-color={color}>
+<div
+	class={`${$$restProps.class} wrapper` || 'wrapper'}
+	style:--spinner-size="{size}px"
+	style:--spinner-color={color}
+>
 	<div class="spinner">
-		{#each bars as _, i}
+		{#each bars as _}
 			<div class="bar" />
 		{/each}
 	</div>

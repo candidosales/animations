@@ -5,7 +5,6 @@
 </script>
 
 <div class="wrapper">
-	<div class="element" />
 	<FirstExample />
 	<ButtonCopy />
 	<ButtonLogin />
