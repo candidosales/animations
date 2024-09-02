@@ -2,7 +2,6 @@
 	import ButtonCopy from './ButtonCopy.svelte';
 	import ButtonLogin from './ButtonLogin.svelte';
 	import FirstExample from './FirstExample.svelte';
-	import Layoult from './Layoult.svelte';
 	import Tabs from './Tabs.svelte';
 </script>
 
@@ -11,7 +10,6 @@
 	<ButtonCopy />
 	<ButtonLogin />
 	<Tabs />
-	<Layoult />
 </div>
 
 <style lang="postcss">
