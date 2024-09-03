@@ -25,6 +25,18 @@
 		{
 			href: '/layout-active-game',
 			label: '[Layout] Active Game'
+		},
+		{
+			href: '/resize-height',
+			label: 'Resize height'
+		},
+		{
+			href: '/drag-example',
+			label: 'Drag example'
+		},
+		{
+			href: '/use-transform',
+			label: 'Use transform'
 		}
 	];
 </script>

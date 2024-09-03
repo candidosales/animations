@@ -2,6 +2,15 @@
 // for information about these interfaces
 declare global {
 	namespace App {
+
+		interface CardImage {
+			title: string;
+			subtitle: string;
+			description: string;
+			longDescription: string;
+			image: string;
+			logo: string;
+		}
 		// interface Error {}
 		// interface Locals {}
 		// interface PageData {}

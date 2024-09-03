@@ -1,22 +1,54 @@
 <script lang="ts">
+	import Motion from 'svelte-motion/src/motion/MotionSSR.svelte';
+	import { onDestroy, onMount } from 'svelte';
+
 	let showExtraContent = false;
+
+	let innerContent: HTMLElement | null = null;
+
+	let height = 0;
+
+	let observer: ResizeObserver | null = null;
+
+	onMount(() => {
+		observer = new ResizeObserver((entries) => {
+			for (let entry of entries) {
+				const rect = entry.target.getBoundingClientRect();
+
+				height = rect.height;
+			}
+		});
+
+		if (innerContent) {
+			observer.observe(innerContent);
+		}
+	});
+
+	onDestroy(() => {
+		if (observer !== null) {
+			observer.disconnect();
+			observer = null;
+		}
+	});
 </script>
 
 <button class="button" on:click={() => (showExtraContent = !showExtraContent)}>
 	Toggle height
 </button>
-<div class="element">
-	<div class="inner">
-		<h1>Fake Family Drawer</h1>
-		<p>This is a fake family drawer. Animating height is tricky, but satisfying when it works.</p>
-		{#if showExtraContent}
-			<p>
-				This extra content will change the height of the drawer. Some even more content to make the
-				drawer taller and taller and taller...
-			</p>
-		{/if}
+<Motion let:motion animate={{ height }}>
+	<div use:motion class="element">
+		<div class="inner" bind:this={innerContent}>
+			<h1>Fake Family Drawer</h1>
+			<p>This is a fake family drawer. Animating height is tricky, but satisfying when it works.</p>
+			{#if showExtraContent}
+				<p>
+					This extra content will change the height of the drawer. Some even more content to make
+					the drawer taller and taller and taller...
+				</p>
+			{/if}
+		</div>
 	</div>
-</div>
+</Motion>
 
 <style lang="scss">
 	.element {
