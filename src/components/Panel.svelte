@@ -5,6 +5,7 @@
 	import LayoutTabs from './LayoutTabs.svelte';
 	import LayoutBox from './LayoutBox.svelte';
 	import LayoutActiveGame from './LayoutActiveGame.svelte';
+	import ResizeHeight from './ResizeHeight.svelte';
 </script>
 
 <div class="wrapper">
@@ -14,6 +15,7 @@
 	<LayoutTabs />
 	<LayoutBox />
 	<LayoutActiveGame />
+	<ResizeHeight />
 </div>
 
 <style lang="postcss">
