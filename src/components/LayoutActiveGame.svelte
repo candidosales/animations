@@ -13,7 +13,7 @@
 		image: string;
 	}
 
-	let activeGame: Game | null = null;
+	let selected: string | null = null;
 
 	const games: Game[] = [
 		{
@@ -63,17 +63,12 @@
 		}
 	];
 
-	const setActiveGame = (game: Game | null) => {
-		activeGame = game;
-	};
-
 	const handleClickOutside = () => {
-		setActiveGame(null);
+		selected = null;
 	};
-
 	const onKeyDown = (event: KeyboardEvent) => {
 		if (event.key === 'Escape') {
-			setActiveGame(null);
+			selected = null;
 		}
 	};
 
@@ -82,83 +77,83 @@
 	});
 </script>
 
-<AnimateSharedLayout>
-	<AnimatePresence list={[{ key: activeGame }]} let:item>
-		{#if activeGame}
-			<Motion let:motion initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-				<div use:motion class="overlay" />
-			</Motion>
-		{/if}
-	</AnimatePresence>
+<AnimateSharedLayout type="crossfade">
+	<AnimatePresence list={games.filter((g) => g.id === selected)} let:item>
+		<Motion
+			let:motion
+			initial={{ opacity: 0 }}
+			animate={{ opacity: 1 }}
+			exit={{ opacity: 0 }}
+			on:click={() => (selected = null)}
+		>
+			<div use:motion class="overlay" />
+		</Motion>
+		<div class="active-game">
+			<Motion let:motion layoutId={`card-${item?.id}`} style={{ borderRadius: 12 }} layout>
+				<div use:motion class="inner" use:clickOutside on:clickOutside={handleClickOutside}>
+					<div class="header">
+						<Motion let:motion layoutId={`image-${item?.id}`} style={{ borderRadius: 12 }}>
+							<img use:motion height={56} width={56} alt="Game" src={item?.image} />
+						</Motion>
 
-	{#if activeGame}
-		<AnimatePresence list={[{ key: activeGame }]} let:item>
-			<div class="active-game">
-				<Motion let:motion layoutId={`card-${item.key.id}`} style={{ borderRadius: 12 }}>
-					<div use:motion class="inner" use:clickOutside on:clickOutside={handleClickOutside}>
-						<div class="header">
-							<Motion let:motion layoutId={`image-${activeGame.id}`} style={{ borderRadius: 12 }}>
-								<img use:motion height={56} width={56} alt="Game" src={activeGame.image} />
-							</Motion>
-
-							<div class="header-inner">
-								<div class="content-wrapper">
-									<Motion let:motion layoutId={`title-${activeGame.id}`}>
-										<h2 use:motion class="game-title">{activeGame.title}</h2>
-									</Motion>
-									<Motion let:motion layoutId={`description-${activeGame.id}`}>
-										<p use:motion class="game-description">{activeGame.description}</p>
-									</Motion>
-								</div>
-								<Motion let:motion layoutId={`button-${activeGame.id}`}>
-									<button use:motion class="button">Get</button>
+						<div class="header-inner">
+							<div class="content-wrapper">
+								<Motion let:motion layoutId={`title-${item?.id}`}>
+									<h2 use:motion class="game-title">{item?.title}</h2>
+								</Motion>
+								<Motion let:motion layoutId={`description-${item?.id}`}>
+									<p use:motion class="game-description">{item?.description}</p>
 								</Motion>
 							</div>
+							<Motion let:motion layoutId={`button-${item?.id}`}>
+								<button use:motion class="button">Get</button>
+							</Motion>
 						</div>
-						<Motion
-							let:motion
-							initial={{ opacity: 0 }}
-							animate={{ opacity: 1 }}
-							exit={{ opacity: 0, transition: { duration: 0.05 } }}
-						>
-							<p use:motion class="long-description">{activeGame.longDescription}</p>
-						</Motion>
 					</div>
-				</Motion>
-			</div>
-		</AnimatePresence>
-	{/if}
-
-	<ul class="list">
-		{#each games as game (game.id)}
-			<Motion let:motion layoutId={`card-${game.id}`} style={{ borderRadius: 8 }}>
-				<!-- svelte-ignore a11y-no-noninteractive-element-to-interactive-role -->
-				<li
-					use:motion
-					role="button"
-					on:click={() => setActiveGame(game)}
-					on:keypress={() => setActiveGame(game)}
-				>
-					<Motion let:motion layoutId={`image-${game.id}`} style={{ borderRadius: 12 }}>
-						<img use:motion height={56} width={56} alt="Game" src={game.image} />
+					<Motion
+						let:motion
+						initial={{ opacity: 0 }}
+						animate={{ opacity: 1 }}
+						exit={{ opacity: 0, transition: { duration: 0.05 } }}
+					>
+						<p use:motion class="long-description">{item?.longDescription}</p>
 					</Motion>
-					<div class="game-wrapper">
-						<div class="content-wrapper">
-							<Motion let:motion layoutId={`title-${game.id}`}>
-								<h2 use:motion class="game-title">{game.title}</h2>
-							</Motion>
-							<Motion let:motion layoutId={`description-${game.id}`}>
-								<p use:motion class="game-description">{game.description}</p>
+				</div>
+			</Motion>
+		</div>
+	</AnimatePresence>
+	<Motion let:motion={list} layout>
+		<ul use:list class="list">
+			{#each games as game (game.id)}
+				<Motion let:motion layoutId={`card-${game.id}`} style={{ borderRadius: 8 }} layout>
+					<!-- svelte-ignore a11y-no-noninteractive-element-to-interactive-role -->
+					<li
+						use:motion
+						role="button"
+						on:click={() => (selected = game.id)}
+						on:keypress={() => (selected = game.id)}
+					>
+						<Motion let:motion layoutId={`image-${game.id}`} style={{ borderRadius: 12 }}>
+							<img use:motion height={56} width={56} alt="Game" src={game.image} />
+						</Motion>
+						<div class="game-wrapper">
+							<div class="content-wrapper">
+								<Motion let:motion layoutId={`title-${game.id}`}>
+									<h2 use:motion class="game-title">{game.title}</h2>
+								</Motion>
+								<Motion let:motion layoutId={`description-${game.id}`}>
+									<p use:motion class="game-description">{game.description}</p>
+								</Motion>
+							</div>
+							<Motion let:motion layoutId={`button-${game.id}`}>
+								<button use:motion class="button">Get</button>
 							</Motion>
 						</div>
-						<Motion let:motion layoutId={`button-${game.id}`}>
-							<button use:motion class="button">Get</button>
-						</Motion>
-					</div>
-				</li>
-			</Motion>
-		{/each}
-	</ul>
+					</li>
+				</Motion>
+			{/each}
+		</ul>
+	</Motion>
 </AnimateSharedLayout>
 
 <style lang="scss">
