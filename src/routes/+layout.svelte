@@ -37,6 +37,10 @@
 		{
 			href: '/use-transform',
 			label: 'Use transform'
+		},
+		{
+			href: '/card-playground',
+			label: 'Card playground'
 		}
 	];
 </script>

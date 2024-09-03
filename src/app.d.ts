@@ -4,6 +4,7 @@ declare global {
 	namespace App {
 
 		interface CardImage {
+			id: string;
 			title: string;
 			subtitle: string;
 			description: string;
