@@ -4,7 +4,6 @@
 
 	import { clickOutside } from '$lib/click-outside';
 	import { onMount } from 'svelte';
-	let activeGame = null;
 
 	interface Game {
 		id: string;
@@ -13,6 +12,8 @@
 		longDescription: string;
 		image: string;
 	}
+
+	let activeGame: Game | null = null;
 
 	const games: Game[] = [
 		{
@@ -62,7 +63,7 @@
 		}
 	];
 
-	const setActiveGame = (game: Game) => {
+	const setActiveGame = (game: Game | null) => {
 		activeGame = game;
 	};
 
@@ -82,22 +83,23 @@
 </script>
 
 <AnimateSharedLayout>
-	{#if activeGame}
-		<AnimatePresence list={[{ key: activeGame }]} let:item>
+	<AnimatePresence list={[{ key: activeGame }]} let:item>
+		{#if activeGame}
 			<Motion let:motion initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
 				<div use:motion class="overlay" />
 			</Motion>
-		</AnimatePresence>
-	{/if}
+		{/if}
+	</AnimatePresence>
+
 	{#if activeGame}
 		<AnimatePresence list={[{ key: activeGame }]} let:item>
 			<div class="active-game">
-				<Motion let:motion layoutId={`game-${item.key.id}`}>
+				<Motion let:motion layoutId={`card-${item.key.id}`}>
 					<div
 						use:motion
 						class="inner"
 						use:clickOutside
-						on:click_outside={handleClickOutside}
+						on:clickOutside={handleClickOutside}
 						style={'border-radius: 12px'}
 					>
 						<div class="header">
@@ -141,8 +143,8 @@
 	{/if}
 
 	<ul class="list">
-		{#each games as game}
-			<Motion let:motion layoutId={`game-${game.id}`}>
+		{#each games as game (game.id)}
+			<Motion let:motion layoutId={`card-${game.id}`}>
 				<!-- svelte-ignore a11y-no-noninteractive-element-to-interactive-role -->
 				<li
 					use:motion
