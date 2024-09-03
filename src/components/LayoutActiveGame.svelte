@@ -94,24 +94,11 @@
 	{#if activeGame}
 		<AnimatePresence list={[{ key: activeGame }]} let:item>
 			<div class="active-game">
-				<Motion let:motion layoutId={`card-${item.key.id}`}>
-					<div
-						use:motion
-						class="inner"
-						use:clickOutside
-						on:clickOutside={handleClickOutside}
-						style={'border-radius: 12px'}
-					>
+				<Motion let:motion layoutId={`card-${item.key.id}`} style={{ borderRadius: 12 }}>
+					<div use:motion class="inner" use:clickOutside on:clickOutside={handleClickOutside}>
 						<div class="header">
-							<Motion let:motion layoutId={`image-${activeGame.id}`}>
-								<img
-									use:motion
-									height={56}
-									width={56}
-									alt="Game"
-									src={activeGame.image}
-									style={'border-radius: 12px'}
-								/>
+							<Motion let:motion layoutId={`image-${activeGame.id}`} style={{ borderRadius: 12 }}>
+								<img use:motion height={56} width={56} alt="Game" src={activeGame.image} />
 							</Motion>
 
 							<div class="header-inner">
@@ -144,24 +131,16 @@
 
 	<ul class="list">
 		{#each games as game (game.id)}
-			<Motion let:motion layoutId={`card-${game.id}`}>
+			<Motion let:motion layoutId={`card-${game.id}`} style={{ borderRadius: 8 }}>
 				<!-- svelte-ignore a11y-no-noninteractive-element-to-interactive-role -->
 				<li
 					use:motion
 					role="button"
 					on:click={() => setActiveGame(game)}
 					on:keypress={() => setActiveGame(game)}
-					style={'border-radius:8px'}
 				>
-					<Motion let:motion layoutId={`image-${game.id}`}>
-						<img
-							use:motion
-							height={56}
-							width={56}
-							alt="Game"
-							src={game.image}
-							style={'border-radius:12px'}
-						/>
+					<Motion let:motion layoutId={`image-${game.id}`} style={{ borderRadius: 12 }}>
+						<img use:motion height={56} width={56} alt="Game" src={game.image} />
 					</Motion>
 					<div class="game-wrapper">
 						<div class="content-wrapper">
