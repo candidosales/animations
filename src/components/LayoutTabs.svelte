@@ -20,7 +20,7 @@
 				on:mouseleave={() => setActiveTab(tab)}
 			>
 				{#if activeTab === tab}
-					<Motion let:motion layoutId="bg-test">
+					<Motion let:motion layoutId="tab-indicator">
 						<div use:motion class=" absolute inset-0 h-7 rounded-lg bg-black/5" />
 					</Motion>
 				{/if}

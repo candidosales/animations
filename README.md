@@ -20,3 +20,8 @@
 
 - Simple animations - AnimeJS
 - Complex animations involving layout or shared layouts - Svelte Motion
+
+
+### Extra
+
+- https://www.programmingtil.com/contents/a-quick-tour-of-the-svelte-motion-library

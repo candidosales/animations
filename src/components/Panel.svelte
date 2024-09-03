@@ -2,14 +2,18 @@
 	import ButtonCopy from './ButtonCopy.svelte';
 	import ButtonLogin from './ButtonLogin.svelte';
 	import FirstExample from './FirstExample.svelte';
-	import Tabs from './Tabs.svelte';
+	import LayoutTabs from './LayoutTabs.svelte';
+	import LayoutBox from './LayoutBox.svelte';
+	import LayoutActiveGame from './LayoutActiveGame.svelte';
 </script>
 
 <div class="wrapper">
 	<FirstExample />
 	<ButtonCopy />
 	<ButtonLogin />
-	<Tabs />
+	<LayoutTabs />
+	<LayoutBox />
+	<LayoutActiveGame />
 </div>
 
 <style lang="postcss">
