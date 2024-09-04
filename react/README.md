@@ -1,5 +1,13 @@
-## Next.js App Router Course - Starter
+# Animations lab
 
-This is the starter template for the Next.js App Router Course. It contains the starting code for the dashboard application.
+## Course
 
-For more information, see the [course curriculum](https://nextjs.org/learn) on the Next.js Website.
+- [Animations](https://animations.dev/)
+
+## Run the project
+
+```bash
+pnpm i
+
+pnpm run dev
+```

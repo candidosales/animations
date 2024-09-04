@@ -4,6 +4,14 @@
 
 - [Animations](https://animations.dev/)
 
+## Run the project
+
+```bash
+npm i
+
+npm run dev
+```
+
 ## How to use
 
 - Simple animations - AnimeJS
