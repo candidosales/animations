@@ -8,6 +8,9 @@ import clsx from 'clsx';
 	{ name: 'First Example', href: '/first-example' },
 	{ name: 'Button Login', href: '/button-login' },
 	{ name: '[Layout] Card List', href: '/card-list' },
+	{ name: '[Layout] Card Game', href: '/card-game' },
+	{ name: '[Layout] Popover', href: '/popover' },
+
   ];
   
   export default function NavLinks() {
