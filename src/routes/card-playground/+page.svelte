@@ -213,7 +213,7 @@
 		flex-direction: column;
 	}
 
-	:global(.button) {
+	:global(.card-button) {
 		font-weight: 600;
 		padding: 4px 16px;
 		font-size: 14px;

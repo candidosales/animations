@@ -41,13 +41,17 @@
 		{
 			href: '/card-playground',
 			label: 'Card playground'
+		},
+		{
+			href: '/popover',
+			label: 'Popover'
 		}
 	];
 </script>
 
 <div class="flex flex-col">
 	<nav class="rounded-md p-2">
-		<ul class="flex flex-row">
+		<ul class="flex flex-row flex-wrap">
 			{#each menu as item}
 				<li class="py-2 pr-4 text-sm hover:text-blue-500"><a href={item.href}>{item.label}</a></li>
 			{/each}
@@ -59,7 +63,7 @@
 </div>
 
 <style lang="scss">
-	:global(.wrapper, .wrapper-white) {
+	:global(.wrapper-black, .wrapper-white) {
 		display: grid;
 		height: 100vh;
 		width: 100vw;

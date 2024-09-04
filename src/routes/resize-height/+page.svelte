@@ -2,6 +2,6 @@
 	import ResizeHeight from '../../components/ResizeHeight.svelte';
 </script>
 
-<div class="wrapper">
+<div class="wrapper-black">
 	<ResizeHeight />
 </div>

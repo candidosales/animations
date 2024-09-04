@@ -3,6 +3,9 @@
 declare global {
 	namespace App {
 
+		type UIState = 'idle' | 'loading' | 'success';
+
+
 		interface CardImage {
 			id: string;
 			title: string;

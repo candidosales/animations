@@ -2,6 +2,6 @@
 	import ButtonCopy from '../../components/ButtonCopy.svelte';
 </script>
 
-<div class="wrapper">
+<div class="wrapper-black">
 	<ButtonCopy />
 </div>

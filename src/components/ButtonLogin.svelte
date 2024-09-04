@@ -4,6 +4,10 @@
 
 	let button: HTMLButtonElement;
 
+	export let state: App.UIState = 'idle';
+	export let idleLabel = 'Send me a login link';
+	export let successLabel = 'Login link sent!';
+
 	const click = () => {
 		button.disabled = true;
 
@@ -43,15 +47,16 @@
 
 		timeline.play();
 		timeline.finished.then(() => {
+			state = 'success';
 			button.disabled = false;
 		});
 	};
 </script>
 
 <button bind:this={button} class="blue-button" on:click={click}>
-	<p class="idle">Send me a login link</p>
+	<p class="idle">{idleLabel}</p>
 	<Spinner class="loading" size={16} />
-	<p class="success">Login link sent!</p>
+	<p class="success">{successLabel}</p>
 </button>
 
 <style lang="scss">

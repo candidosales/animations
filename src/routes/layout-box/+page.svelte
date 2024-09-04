@@ -2,6 +2,6 @@
 	import LayoutBox from '../../components/LayoutBox.svelte';
 </script>
 
-<div class="wrapper">
+<div class="wrapper-black">
 	<LayoutBox />
 </div>

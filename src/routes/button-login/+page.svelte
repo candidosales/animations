@@ -2,6 +2,6 @@
 	import ButtonLogin from '../../components/ButtonLogin.svelte';
 </script>
 
-<div class="wrapper">
+<div class="wrapper-black">
 	<ButtonLogin />
 </div>

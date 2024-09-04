@@ -26,7 +26,7 @@
 				</Motion>
 			</div>
 			<Motion let:motion layoutId={`button-${game.id}`}>
-				<button use:motion class="button">Get</button>
+				<button use:motion class="card-button">Get</button>
 			</Motion>
 		</div>
 	</li>
