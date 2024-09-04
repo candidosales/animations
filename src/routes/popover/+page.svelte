@@ -1,13 +1,11 @@
 <script lang="ts">
 	import { AnimatePresence, AnimateSharedLayout } from 'svelte-motion';
-	import { onMount } from 'svelte';
+	import { onMount, tick } from 'svelte';
 	import Motion from 'svelte-motion/src/motion/MotionSSR.svelte';
 
 	let isOpenPopover = false;
 	let formState: App.UIState = 'success';
-	let feedback = '';
-
-	let feedbackPopover: HTMLElement | null;
+	let feedback: string | null = null;
 
 	const setOpen = (state: boolean) => {
 		isOpenPopover = state;
@@ -17,8 +15,7 @@
 		formState = state;
 	};
 
-	const setFeedback = (feedback: string): void => {
-		console.log('setFeedback', feedback);
+	const setFeedback = (feedback: string | null): void => {
 		feedback = feedback;
 	};
 
@@ -29,8 +26,15 @@
 		// }, 1500);
 
 		setTimeout(() => {
+			setFormState('idle');
+		}, 400);
+
+		setTimeout(() => {
+			tick();
+
+			setFeedback(null);
 			setOpen(false);
-		}, 3300);
+		}, 1000);
 	};
 
 	const onKeyDown = (event: KeyboardEvent) => {
@@ -53,7 +57,7 @@
 					on:click={() => {
 						setOpen(true);
 						setFormState('idle');
-						setFeedback('');
+						setFeedback(null);
 					}}
 					class="feedback-button"
 				>
@@ -64,7 +68,7 @@
 			</Motion>
 			<AnimatePresence show={isOpenPopover}>
 				<Motion let:motion layoutId="wrapper" style={{ borderRadius: 12 }}>
-					<div use:motion class="feedback-popover" bind:this={feedbackPopover}>
+					<div use:motion class="feedback-popover">
 						<Motion let:motion layoutId="title">
 							<span
 								use:motion
@@ -83,6 +87,7 @@
 									initial={{ y: -32, opacity: 0, filter: 'blur(4px)' }}
 									animate={{ y: 0, opacity: 1, filter: 'blur(0px)' }}
 									transition={{ type: 'spring', duration: 0.4, bounce: 0 }}
+									exit={{ opacity: 0, transition: { duration: 0.01 } }}
 								>
 									<div use:motion class="success-wrapper">
 										<svg
@@ -128,7 +133,7 @@
 										fill="none"
 										xmlns="http://www.w3.org/2000/svg"
 									>
-										<path d="M0 1H352" stroke="#E6E7E8" strokeDasharray="4 4" />
+										<path d="M0 1H352" stroke="#E6E7E8" stroke-dasharray="4 4" />
 									</svg>
 									<div class="half-circle-left">
 										<svg
@@ -138,7 +143,7 @@
 											fill="none"
 											xmlns="http://www.w3.org/2000/svg"
 										>
-											<g clipPath="url(#clip0_2029_22)">
+											<g clip-path="url(#clip0_2029_22)">
 												<path
 													d="M0 2C0.656613 2 1.30679 2.10346 1.91341 2.30448C2.52005 2.5055 3.07124 2.80014 3.53554 3.17157C3.99982 3.54301 4.36812 3.98396 4.6194 4.46927C4.87067 4.95457 5 5.47471 5 6C5 6.52529 4.87067 7.04543 4.6194 7.53073C4.36812 8.01604 3.99982 8.45699 3.53554 8.82843C3.07124 9.19986 2.52005 9.4945 1.91341 9.69552C1.30679 9.89654 0.656613 10 0 10V6V2Z"
 													fill="#F5F6F7"
@@ -146,8 +151,8 @@
 												<path
 													d="M1 12V10C2.06087 10 3.07828 9.57857 3.82843 8.82843C4.57857 8.07828 5 7.06087 5 6C5 4.93913 4.57857 3.92172 3.82843 3.17157C3.07828 2.42143 2.06087 2 1 2V0"
 													stroke="#E6E7E8"
-													strokeWidth="1"
-													strokeLinejoin="round"
+													stroke-width="1"
+													stroke-linejoin="round"
 												/>
 											</g>
 											<defs>
@@ -166,7 +171,7 @@
 											fill="none"
 											xmlns="http://www.w3.org/2000/svg"
 										>
-											<g clipPath="url(#clip0_2029_22)">
+											<g clip-path="url(#clip0_2029_22)">
 												<path
 													d="M0 2C0.656613 2 1.30679 2.10346 1.91341 2.30448C2.52005 2.5055 3.07124 2.80014 3.53554 3.17157C3.99982 3.54301 4.36812 3.98396 4.6194 4.46927C4.87067 4.95457 5 5.47471 5 6C5 6.52529 4.87067 7.04543 4.6194 7.53073C4.36812 8.01604 3.99982 8.45699 3.53554 8.82843C3.07124 9.19986 2.52005 9.4945 1.91341 9.69552C1.30679 9.89654 0.656613 10 0 10V6V2Z"
 													fill="#F5F6F7"
@@ -174,8 +179,8 @@
 												<path
 													d="M1 12V10C2.06087 10 3.07828 9.57857 3.82843 8.82843C4.57857 8.07828 5 7.06087 5 6C5 4.93913 4.57857 3.92172 3.82843 3.17157C3.07828 2.42143 2.06087 2 1 2V0"
 													stroke="#E6E7E8"
-													strokeWidth="1"
-													strokeLinejoin="round"
+													stroke-width="1"
+													stroke-linejoin="round"
 												/>
 											</g>
 											<defs>

@@ -21,6 +21,7 @@
 			</AnimatePresence>
 		</AnimateSharedLayout>
   ```
+  - ⚠️ `AnimatePresence` missed the `mode="popLayout"`
 
 
 ## Tools
@@ -47,9 +48,8 @@
 - From to: https://animejs.com/documentation/#fromToValues
 
 
-
-
-
-### Extra
+### Resources
 
 - https://www.programmingtil.com/contents/a-quick-tour-of-the-svelte-motion-library
+- https://animation-svelte.vercel.app/
+- https://github.com/SikandarJODD/motions
