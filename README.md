@@ -4,52 +4,9 @@
 
 - [Animations](https://animations.dev/)
 
-## How to use
 
-- Simple animations - AnimeJS
-- Complex animations involving layout or shared layouts - Svelte Motion
-  - `style={{ opacity: 0}}` not works in `<Motion>` tags, you should replace in the div by `style={opacity:0}`;
-  - The order of the elements when using `AnimateSharedLayout` indicates how the animation will work. Recommendation: Always <AnimatePresence> as the last component. Example below:
+The course provides exercices using React with Framer Motion, and I tried to convert them to Svelte with Svelte Motion, but I found some issues.
 
-  ```html
-	<AnimateSharedLayout type="crossfade">
-			{#each cards as card (card.title)}
-				<Card {card} bind:selected />
-			{/each}
-			<AnimatePresence list={cards.filter((c) => c.id === selected)} let:item>
-				<ActiveCard activeCard={item} bind:selected />
-			</AnimatePresence>
-		</AnimateSharedLayout>
-  ```
-  - ⚠️ `AnimatePresence` missed the `mode="popLayout"`
-
-
-## Tools
-
-- [Svelte](https://svelte.dev/)
-- [Svelte Motion](https://svelte-motion.gradientdescent.de/)
-- [AnimeJS](https://animejs.com/)
-- [Motion](https://motion.dev/)
-- [Popmotion](https://popmotion.io/)
-
-## Order
-
-- FirstExample
-- ButtonCopy
-- ButtonLogin
-- LayoutTabs
-- LayoutBox
-- LayoutActiveGame
-- ResizeHeight
-
-## AnimeJS documentations
-
-- CSS transformations: https://animejs.com/documentation/#CSStransforms
-- From to: https://animejs.com/documentation/#fromToValues
-
-
-### Resources
-
-- https://www.programmingtil.com/contents/a-quick-tour-of-the-svelte-motion-library
-- https://animation-svelte.vercel.app/
-- https://github.com/SikandarJODD/motions
+- Svelte Motion uses implementation from Framer Motion version [4.1.1](https://github.com/micha-lmxt/svelte-motion/blob/master/src/render/index.js#L2C10-L2C29) ([Framer Motion - 2021](https://github.com/framer/motion/blob/main/CHANGELOG.md#4111-2021-04-28)), so many features isn't implemented or have bugs, for example `<AnimatePresence>` hasn't option for `mode="popLayout"`;
+- The `style` in the `Motion` tag not works as expected with `AnimatePresente`;
+- The order of the elements when using `<AnimateSharedLayout>` and `<AnimatePresence>` indicates how the animation will work, so this can bring bugs;
