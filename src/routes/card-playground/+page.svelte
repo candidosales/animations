@@ -2,7 +2,7 @@
 	import { AnimatePresence, AnimateSharedLayout } from 'svelte-motion';
 	import Card from '../../components/Card.svelte';
 	import ActiveCard from '../../components/ActiveCard.svelte';
-	import Motion from 'svelte-motion/src/motion/MotionSSR.svelte';
+	import { onMount } from 'svelte';
 
 	const cards: App.CardImage[] = [
 		{
@@ -19,6 +19,16 @@
 	];
 
 	let selected: string | null = null;
+
+	const onKeyDown = (event: KeyboardEvent) => {
+		if (event.key === 'Escape') {
+			selected = null;
+		}
+	};
+
+	onMount(() => {
+		window.addEventListener('keydown', onKeyDown);
+	});
 </script>
 
 <div class="wrapper-white">

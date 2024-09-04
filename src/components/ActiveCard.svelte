@@ -68,8 +68,8 @@
 						layoutId={`card-extra-info-${activeCard.title}`}
 						style={{ borderBottomLeftRadius: 20, borderBottomRightRadius: 20 }}
 					>
-						<div class="extra-info" use:motion layoutId={`card-game-image-${activeCard.title}`}>
-							<Motion let:motion>
+						<div class="extra-info" use:motion>
+							<Motion let:motion layoutId={`card-game-image-${activeCard.title}`}>
 								<img
 									use:motion
 									src={activeCard.logo}
