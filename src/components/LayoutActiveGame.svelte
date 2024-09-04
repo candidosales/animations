@@ -4,6 +4,7 @@
 
 	import { clickOutside } from '$lib/click-outside';
 	import { onMount } from 'svelte';
+	import CardGame from './CardGame.svelte';
 
 	interface Game {
 		id: string;
@@ -78,6 +79,13 @@
 </script>
 
 <AnimateSharedLayout type="crossfade">
+	<Motion let:motion={list} layout>
+		<ul use:list class="list">
+			{#each games as game (game.id)}
+				<CardGame {game} bind:selected />
+			{/each}
+		</ul>
+	</Motion>
 	<AnimatePresence list={games.filter((g) => g.id === selected)} let:item>
 		<Motion
 			let:motion
@@ -122,38 +130,6 @@
 			</Motion>
 		</div>
 	</AnimatePresence>
-	<Motion let:motion={list} layout>
-		<ul use:list class="list">
-			{#each games as game (game.id)}
-				<Motion let:motion layoutId={`card-${game.id}`} style={{ borderRadius: 8 }} layout>
-					<!-- svelte-ignore a11y-no-noninteractive-element-to-interactive-role -->
-					<li
-						use:motion
-						role="button"
-						on:click={() => (selected = game.id)}
-						on:keypress={() => (selected = game.id)}
-					>
-						<Motion let:motion layoutId={`image-${game.id}`} style={{ borderRadius: 12 }}>
-							<img use:motion height={56} width={56} alt="Game" src={game.image} />
-						</Motion>
-						<div class="game-wrapper">
-							<div class="content-wrapper">
-								<Motion let:motion layoutId={`title-${game.id}`}>
-									<h2 use:motion class="game-title">{game.title}</h2>
-								</Motion>
-								<Motion let:motion layoutId={`description-${game.id}`}>
-									<p use:motion class="game-description">{game.description}</p>
-								</Motion>
-							</div>
-							<Motion let:motion layoutId={`button-${game.id}`}>
-								<button use:motion class="button">Get</button>
-							</Motion>
-						</div>
-					</li>
-				</Motion>
-			{/each}
-		</ul>
-	</Motion>
 </AnimateSharedLayout>
 
 <style lang="scss">
@@ -167,7 +143,7 @@
 		margin: 48px 0;
 	}
 
-	.list li {
+	:global(.list li) {
 		display: flex;
 		width: 386px;
 		cursor: pointer;
@@ -176,7 +152,7 @@
 		padding: 0;
 	}
 
-	.game-wrapper {
+	:global(.game-wrapper) {
 		display: flex;
 		flex-grow: 1;
 		align-items: center;
@@ -184,31 +160,31 @@
 		border-bottom: 1px solid #d4d6d861;
 	}
 
-	.list li:last-of-type .game-wrapper {
+	:global(.list li:last-of-type .game-wrapper) {
 		border: none;
 	}
 
-	.content-wrapper {
+	:global(.content-wrapper) {
 		display: flex;
 		flex-direction: column;
 		padding: 16px 0;
 	}
 
-	.active-game .content-wrapper {
+	:global(.active-game .content-wrapper) {
 		padding: 0;
 	}
 
-	.game-title {
+	:global(.game-title) {
 		font-size: 14px;
 		font-weight: 500;
 	}
 
-	.game-description {
+	:global(.game-description) {
 		font-size: 14px;
 		color: #63635d;
 	}
 
-	.button {
+	:global(.button) {
 		border-radius: 9999px;
 		background: #f1f0ef;
 		padding: 4px 12px;
@@ -217,7 +193,7 @@
 		color: #007aff;
 	}
 
-	.active-game {
+	:global(.active-game) {
 		position: absolute;
 		inset: 0;
 		display: grid;

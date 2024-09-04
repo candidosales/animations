@@ -12,6 +12,15 @@ declare global {
 			image: string;
 			logo: string;
 		}
+
+
+	interface Game {
+		id: string;
+		title: string;
+		description: string;
+		longDescription: string;
+		image: string;
+	}
 		// interface Error {}
 		// interface Locals {}
 		// interface PageData {}

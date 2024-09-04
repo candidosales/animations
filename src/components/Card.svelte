@@ -17,13 +17,14 @@
 		class="card"
 		role="button"
 		tabindex="-1"
+		style={'border-radius: 20px'}
 		on:click={() => (selected = card.id)}
 		on:keypress={() => (selected = card.id)}
 	>
 		<Motion let:motion layoutId={`image-${card.title}`} style={{ borderRadius: 20 }}>
-			<img use:motion src={card.image} alt="image" />
+			<img use:motion src={card.image} alt="image" style={'border-radius: 20px'} />
 		</Motion>
-		<Motion let:motion layoutId={`close-button-${card.title}`} style={{ opacity: 0 }}>
+		<Motion let:motion layoutId={`close-button-${card.title}`} initial={{ opacity: 0 }}>
 			<button use:motion aria-hidden tabIndex={-1} class="close-button">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
@@ -82,6 +83,7 @@
 		</Motion>
 		<Motion
 			let:motion
+			layout
 			layoutId={`card-long-description-${card.title}`}
 			style={{ position: 'absolute', top: '100%', opacity: 0 }}
 		>

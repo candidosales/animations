@@ -8,6 +8,19 @@
 
 - Simple animations - AnimeJS
 - Complex animations involving layout or shared layouts - Svelte Motion
+  - `style={{ opacity: 0}}` not works in `<Motion>` tags, you should replace in the div by `style={opacity:0}`;
+  - The order of the elements when using `AnimateSharedLayout` indicates how the animation will work. Recommendation: Always <AnimatePresence> as the last component. Example below:
+
+  ```html
+	<AnimateSharedLayout type="crossfade">
+			{#each cards as card (card.title)}
+				<Card {card} bind:selected />
+			{/each}
+			<AnimatePresence list={cards.filter((c) => c.id === selected)} let:item>
+				<ActiveCard activeCard={item} bind:selected />
+			</AnimatePresence>
+		</AnimateSharedLayout>
+  ```
 
 
 ## Tools

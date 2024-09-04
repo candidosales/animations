@@ -2,6 +2,7 @@
 	import { AnimatePresence, AnimateSharedLayout } from 'svelte-motion';
 	import Card from '../../components/Card.svelte';
 	import ActiveCard from '../../components/ActiveCard.svelte';
+	import Motion from 'svelte-motion/src/motion/MotionSSR.svelte';
 
 	const cards: App.CardImage[] = [
 		{
@@ -18,27 +19,17 @@
 	];
 
 	let selected: string | null = null;
-
-	const selectedCard = (selected: string): void => {
-		console.log('selectedCard', selected);
-	};
-
-	$: {
-		if (selected) {
-			console.log('selected', selected);
-		}
-	}
 </script>
 
-<div class="wrapper">
+<div class="wrapper-white">
 	<div class="cards-wrapper">
-		<AnimateSharedLayout type="crossfade">
+		<AnimateSharedLayout>
+			{#each cards as card (card.id)}
+				<Card {card} bind:selected />
+			{/each}
 			<AnimatePresence list={cards.filter((c) => c.id === selected)} let:item>
 				<ActiveCard activeCard={item} bind:selected />
 			</AnimatePresence>
-			{#each cards as card (card.title)}
-				<Card {card} bind:selected />
-			{/each}
 		</AnimateSharedLayout>
 	</div>
 </div>
