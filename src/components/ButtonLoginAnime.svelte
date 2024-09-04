@@ -4,7 +4,6 @@
 
 	let button: HTMLButtonElement;
 
-	export let state: App.UIState = 'idle';
 	export let idleLabel = 'Send me a login link';
 	export let successLabel = 'Login link sent!';
 
@@ -29,12 +28,12 @@
 				opacity: variants.hidden.opacity
 			})
 			.add({
-				targets: '.loading',
+				targets: '.loading-anime',
 				translateY: variants.visible.translateY,
 				opacity: variants.visible.opacity
 			})
 			.add({
-				targets: '.loading',
+				targets: '.loading-anime',
 				translateY: variants.hidden.translateY,
 				opacity: variants.hidden.opacity,
 				delay: 600
@@ -47,7 +46,6 @@
 
 		timeline.play();
 		timeline.finished.then(() => {
-			state = 'success';
 			button.disabled = false;
 		});
 	};
@@ -55,7 +53,7 @@
 
 <button bind:this={button} class="blue-button" on:click={click}>
 	<p class="idle">{idleLabel}</p>
-	<Spinner class="loading" size={16} />
+	<Spinner class="loading-anime" size={16} />
 	<p class="success">{successLabel}</p>
 </button>
 
@@ -85,12 +83,12 @@
 	}
 
 	.idle,
-	:global(.loading),
+	:global(.loading-anime),
 	.success {
 		position: absolute;
 	}
 
-	:global(.loading),
+	:global(.loading-anime),
 	.success {
 		opacity: 0;
 	}

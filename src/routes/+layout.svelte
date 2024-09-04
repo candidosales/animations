@@ -1,5 +1,6 @@
-<script>
+<script lang="ts">
 	import '../app.css';
+	import { page } from '$app/stores';
 
 	const menu = [
 		{
@@ -53,7 +54,9 @@
 	<nav class="rounded-md p-2">
 		<ul class="flex flex-row flex-wrap">
 			{#each menu as item}
-				<li class="py-2 pr-4 text-sm hover:text-blue-500"><a href={item.href}>{item.label}</a></li>
+				<li class="p-2 text-sm hover:text-blue-500" class:active={$page.url.pathname === item.href}>
+					<a href={item.href}>{item.label}</a>
+				</li>
 			{/each}
 		</ul>
 	</nav>
@@ -73,5 +76,13 @@
 
 	:global(.wrapper-white) {
 		background: white;
+	}
+
+	:global(li.active) {
+		padding: 8px 12px;
+		background: #dbeafe;
+		font-weight: 600;
+		color: #2563eb;
+		border-radius: 14px;
 	}
 </style>
