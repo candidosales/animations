@@ -10,7 +10,8 @@ import clsx from 'clsx';
 	{ name: '[Layout] Card List', href: '/card-list' },
 	{ name: '[Layout] Card Game', href: '/card-game' },
 	{ name: '[Layout] Popover', href: '/popover' },
-
+	{ name: '[Layout] Multi Step', href: '/multi-step' },
+	{ name: 'Trash', href: '/trash' },
   ];
   
   export default function NavLinks() {
