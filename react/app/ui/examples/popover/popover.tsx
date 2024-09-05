@@ -78,9 +78,12 @@ export default function Popover() {
             >
               Feedback
             </motion.span>
-
+			<AnimatePresence mode="popLayout">
             {formState === "success" ? (
-              <div className="success-wrapper" key="success">
+              <motion.div className="success-wrapper" key="success"  
+			  	initial={{ y: -32, opacity: 0, filter: "blur(4px)" }}
+			  	animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
+			  	transition={{ type: "spring", duration: 0.4, bounce: 0 }}>
                 <svg
                   width="32"
                   height="32"
@@ -103,9 +106,11 @@ export default function Popover() {
                 </svg>
                 <h3>Feedback received!</h3>
                 <p>Thanks for helping me improve Sonner.</p>
-              </div>
+              </motion.div>
             ) : (
-              <form
+              <motion.form
+			  exit={{ y: 8, opacity: 0, filter: "blur(4px)" }}
+                  transition={{ type: "spring", duration: 0.4, bounce: 0 }}
 			    key="form"
                 onSubmit={(e) => {
 			e.preventDefault();
@@ -214,8 +219,9 @@ export default function Popover() {
                     </AnimatePresence>
                   </button>
                 </div>
-              </form>
+              </motion.form>
             )}
+			</AnimatePresence>
           </motion.div>
         ) : null}
       </AnimatePresence>
