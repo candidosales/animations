@@ -1,18 +1,18 @@
 "use client";
- 
+
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Spinner } from "./spinner";
- 
+
 const buttonCopy = {
   idle: "Send me a login link",
   loading: <Spinner size={16} color="rgba(255, 255, 255, 0.65)" />,
   success: "Login link sent!",
 };
- 
+
 export default function ButtonLogin() {
   const [buttonState, setButtonState] = useState("idle");
- 
+
   return (
     <div className="outer-wrapper">
       <button
@@ -20,13 +20,13 @@ export default function ButtonLogin() {
         disabled={buttonState === "loading"}
         onClick={() => {
           if (buttonState === "success") return;
- 
+
           setButtonState("loading");
- 
+
           setTimeout(() => {
             setButtonState("success");
           }, 1750);
- 
+
           setTimeout(() => {
             setButtonState("idle");
           }, 3500);

@@ -23,7 +23,7 @@ function Card({ card, setActiveCard }) {
       <motion.button
         aria-hidden
         tabIndex={-1}
-		layoutId={`close-button-${card.title}`}
+        layoutId={`close-button-${card.title}`}
         className="close-button"
         style={{ opacity: 0 }}
       >

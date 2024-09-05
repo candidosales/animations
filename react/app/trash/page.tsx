@@ -1,9 +1,9 @@
-import MultiStep from "../ui/examples/multi-step/multi-step";
+import { TrashAnimation } from "../ui/examples/trash/trash-animation";
 
 export default function Page() {
-	return (
-	
-	<div className="grid w-full h-[100vh] place-items-center bg-white">
-		<MultiStep/>
-	</div>);
-  }
+  return (
+    <div className="h-screen items-center justify-center flex">
+      <TrashAnimation />
+    </div>
+  );
+}

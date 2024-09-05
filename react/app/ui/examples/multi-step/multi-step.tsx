@@ -6,11 +6,10 @@ import useMeasure from "react-use-measure";
 import "./style.css";
 
 export default function MultiStep() {
-	const maxSteps = 2 ;
+  const maxSteps = 2;
   const [currentStep, setCurrentStep] = useState(0);
   const [direction, setDirection] = useState(1);
   const [ref, bounds] = useMeasure();
-
 
   const content = useMemo(() => {
     switch (currentStep) {
@@ -66,62 +65,66 @@ export default function MultiStep() {
   }, [currentStep]);
 
   return (
-	<MotionConfig transition={{ opacity: 0.5, type: "spring", bounce: 0 }}>
-    <motion.div animate={{height: bounds.height }} className="multi-step-wrapper">
-      <div className="multi-step-inner" ref={ref}>
-		<AnimatePresence mode="popLayout" initial={false} custom={direction}>
-        	<motion.div 
-				key={currentStep} 
-				variants={variants}
-				initial="initial" 
-				animate="active" 
-				exit="exit"
-				custom={direction}
-						
-				>{content}</motion.div>
-		</AnimatePresence>
-        <motion.div layout className="actions">
-          <button
-            className="secondary-button"
-            disabled={currentStep === 0}
-            onClick={() => {
-              if (currentStep === 0) {
-                return;
-              }
-			  setDirection(-1);
-              setCurrentStep((prev) => prev - 1);
-            }}
-          >
-            Back
-          </button>
-          <button
-            className="primary-button"
-            disabled={currentStep === maxSteps}
-            onClick={() => {
-              if (currentStep === maxSteps) {
-                setCurrentStep(0);
-				setDirection(-1);
-                return;
-              }
-			  setDirection(1);
-              setCurrentStep((prev) => prev + 1);
-            }}
-          >
-            Continue
-          </button>
-        </motion.div>
-      </div>
-    </motion.div>
-	</MotionConfig>
+    <MotionConfig transition={{ opacity: 0.5, type: "spring", bounce: 0 }}>
+      <motion.div
+        animate={{ height: bounds.height }}
+        className="multi-step-wrapper"
+      >
+        <div className="multi-step-inner" ref={ref}>
+          <AnimatePresence mode="popLayout" initial={false} custom={direction}>
+            <motion.div
+              key={currentStep}
+              variants={variants}
+              initial="initial"
+              animate="active"
+              exit="exit"
+              custom={direction}
+            >
+              {content}
+            </motion.div>
+          </AnimatePresence>
+          <motion.div layout className="actions">
+            <button
+              className="secondary-button"
+              disabled={currentStep === 0}
+              onClick={() => {
+                if (currentStep === 0) {
+                  return;
+                }
+                setDirection(-1);
+                setCurrentStep((prev) => prev - 1);
+              }}
+            >
+              Back
+            </button>
+            <button
+              className="primary-button"
+              disabled={currentStep === maxSteps}
+              onClick={() => {
+                if (currentStep === maxSteps) {
+                  setCurrentStep(0);
+                  setDirection(-1);
+                  return;
+                }
+                setDirection(1);
+                setCurrentStep((prev) => prev + 1);
+              }}
+            >
+              Continue
+            </button>
+          </motion.div>
+        </div>
+      </motion.div>
+    </MotionConfig>
   );
 }
 
 const variants = {
-	initial: (direction: number) => {
-	  return { x: `${110 * direction}%`, opacity: 0 };
-	},
-	active: { x: "0%", opacity: 1 },
-	exit: (direction: number) => {
-	  return { x: `${-110 * direction}%`, opacity: 0 };
-	},
-  };
+  initial: (direction: number) => {
+    return { x: `${110 * direction}%`, opacity: 0 };
+  },
+  active: { x: "0%", opacity: 1 },
+  exit: (direction: number) => {
+    return { x: `${-110 * direction}%`, opacity: 0 };
+  },
+};
