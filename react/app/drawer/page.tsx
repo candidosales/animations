@@ -1,5 +1,10 @@
 import FamilyDrawer from "../ui/examples/family-drawer/family-drawer";
 
+export const metadata = {
+	title: "Drawer"
+}
+
+
 export default function Page() {
 	return (
 	

@@ -1,5 +1,10 @@
 import MultiStep from "../ui/examples/multi-step/multi-step";
 
+export const metadata = {
+	title: "Multi Step"
+}
+
+
 export default function Page() {
 	return (
 	
