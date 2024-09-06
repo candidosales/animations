@@ -1,0 +1,9 @@
+[vaul-drawer] {
+    /* You'll need `!important` to override Vaul's defaults */
+    transition: transform 0.2s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
+}
+
+[vaul-overlay] {
+    /* You'll need `!important` to override Vaul's defaults */
+    transition: opacity 0.2s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
+}

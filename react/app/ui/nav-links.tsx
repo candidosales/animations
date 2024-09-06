@@ -13,6 +13,8 @@ const links = [
   { name: "[Layout] Multi Step", href: "/multi-step" },
   { name: "Trash", href: "/trash" },
   { name: "Orchestration", href: "/orchestration" },
+  { name: "Drawer", href: "/drawer" },
+  { name: "Dynamic Island", href: "/dynamic-island" },
 ];
 
 export default function NavLinks() {
