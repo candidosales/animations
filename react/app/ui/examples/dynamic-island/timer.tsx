@@ -8,9 +8,10 @@ export function Timer() {
 
   return (
     <div className="flex w-[284px] items-center gap-2 pr-5 pl-3.5 py-3">
-      <button
+      <motion.button
         aria-label="Pause timer"
         onClick={() => setIsPaused((p) => !p)}
+		whileTap={{ scale: 0.9 }}
         className="flex h-10 w-10 items-center justify-center rounded-full bg-[#5A3C07] transition-colors hover:bg-[#694608]"
       >
 		<AnimatePresence initial={false} mode="wait">
@@ -30,12 +31,12 @@ export function Timer() {
           </motion.svg>
         ) : (
           <motion.svg
-		  	key="pause"
+            key="pause"
 			initial={{ opacity: 0, scale: 0.5, filter: "blur(4px)"}}
 			animate={{ opacity: 1, scale: 1, filter: "blur(0px)"}}
 			exit={{ opacity: 0, scale: 0.5, filter: "blur(4px)"}}
 			transition={{ duration: 0.1 }}
-            viewBox="0 0 10 13"
+			viewBox="0 0 10 13"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             className="h-4 w-4 fill-current text-[#FDB000]"
@@ -43,10 +44,11 @@ export function Timer() {
             <path d="M1.03906 12.7266H2.82031C3.5 12.7266 3.85938 12.3672 3.85938 11.6797V1.03906C3.85938 0.328125 3.5 0 2.82031 0H1.03906C0.359375 0 0 0.359375 0 1.03906V11.6797C0 12.3672 0.359375 12.7266 1.03906 12.7266ZM6.71875 12.7266H8.49219C9.17969 12.7266 9.53125 12.3672 9.53125 11.6797V1.03906C9.53125 0.328125 9.17969 0 8.49219 0H6.71875C6.03125 0 5.67188 0.359375 5.67188 1.03906V11.6797C5.67188 12.3672 6.03125 12.7266 6.71875 12.7266Z" />
           </motion.svg>
         )}
-		<AnimatePresence>
+		</AnimatePresence>
 
-      </button>
-      <button
+      </motion.button>
+      <motion.button
+	  	whileTap={{ scale: 0.9 }}
         aria-label="Exit"
         className="flex h-10 w-10 items-center justify-center rounded-full bg-[#3C3D3C] text-white transition-colors hover:bg-[#4A4B4A]"
       >
@@ -64,7 +66,7 @@ export function Timer() {
             d="M6 18L18 6M6 6l12 12"
           />
         </svg>
-      </button>
+      </motion.button>
       <div className="flex items-baseline gap-1.5 text-[#F7A815] ml-auto pr-0.5">
         <span className="text-sm font-medium leading-none text-inherit">
           Timer
