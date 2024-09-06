@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { Ring } from "./ring";
 import { motion } from "framer-motion";
+import { Timer } from "./timer";
 
 export default function DynamicIsland() {
   const [view, setView] = useState("idle");
@@ -11,7 +12,9 @@ export default function DynamicIsland() {
     switch (view) {
       case "ring":
         return <Ring />;
-      case "idle":
+      case "timer":
+        return <Timer/>;
+	  case "idle":
         return <div className="h-7" />;
     }
   }, [view]);
@@ -41,6 +44,13 @@ export default function DynamicIsland() {
           onClick={() => setView("ring")}
         >
           Ring
+        </button>
+		<button
+          type="button"
+          className="rounded-full w-32 h-10 bg-white px-2.5 py-1.5 text-sm font-medium text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+          onClick={() => setView("timer")}
+        >
+          Timer
         </button>
       </div>
     </div>
